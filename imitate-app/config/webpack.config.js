@@ -26,6 +26,10 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const postcssNormalize = require('postcss-normalize');
+// 量化
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+// 分析包内容 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; 
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -47,6 +51,11 @@ const cssRegex = /.(css|less)/;
 const cssModuleRegex = /.module.(css|less)/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+
+
+
+const smp = new SpeedMeasurePlugin();
+
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -128,8 +137,7 @@ module.exports = function(webpackEnv) {
     }
     return loaders;
   };
-
-  return {
+  return smp.wrap({
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
@@ -330,7 +338,7 @@ module.exports = function(webpackEnv) {
         {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
           enforce: 'pre',
-          use: [
+          use: ['cache-loader',
             {
               options: {
                 cache: true,
@@ -509,6 +517,7 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
+      new BundleAnalyzerPlugin(),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
@@ -666,5 +675,6 @@ module.exports = function(webpackEnv) {
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
-  };
+  })
+
 };
