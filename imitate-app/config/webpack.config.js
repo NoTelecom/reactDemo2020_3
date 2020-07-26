@@ -26,10 +26,13 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const postcssNormalize = require('postcss-normalize');
+<<<<<<< HEAD
 // 量化
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // 分析包内容 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; 
+=======
+>>>>>>> 2f1b7703b450213dc1f2d1795966c7d8eeb24522
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -52,11 +55,14 @@ const cssModuleRegex = /.module.(css|less)/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
+<<<<<<< HEAD
 
 
 const smp = new SpeedMeasurePlugin();
 
 
+=======
+>>>>>>> 2f1b7703b450213dc1f2d1795966c7d8eeb24522
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function(webpackEnv) {
@@ -137,7 +143,12 @@ module.exports = function(webpackEnv) {
     }
     return loaders;
   };
+<<<<<<< HEAD
   return smp.wrap({
+=======
+
+  return {
+>>>>>>> 2f1b7703b450213dc1f2d1795966c7d8eeb24522
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
@@ -338,7 +349,11 @@ module.exports = function(webpackEnv) {
         {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
           enforce: 'pre',
+<<<<<<< HEAD
           use: ['cache-loader',
+=======
+          use: [
+>>>>>>> 2f1b7703b450213dc1f2d1795966c7d8eeb24522
             {
               options: {
                 cache: true,
@@ -517,7 +532,10 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
+<<<<<<< HEAD
       new BundleAnalyzerPlugin(),
+=======
+>>>>>>> 2f1b7703b450213dc1f2d1795966c7d8eeb24522
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
@@ -675,6 +693,10 @@ module.exports = function(webpackEnv) {
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
+<<<<<<< HEAD
   })
 
+=======
+  };
+>>>>>>> 2f1b7703b450213dc1f2d1795966c7d8eeb24522
 };
